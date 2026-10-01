@@ -1,3 +1,7 @@
+# Automação com foco em emissão de relatórios para fechamento de convênios
+# Desenvolvido para uso no Sistema ERP Linx Big Farma
+
+
 import pyautogui
 from time import sleep
 from datetime import date
