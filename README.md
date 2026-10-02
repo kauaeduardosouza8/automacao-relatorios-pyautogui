@@ -1,4 +1,4 @@
-\# Automação de Relatórios — Linx Big Farma
+\# Projeto independente desenvolvido para automatizar rotinas realizadas no ERP Linx Big Farma.
 
 
 
@@ -1095,6 +1095,16 @@ Este projeto foi desenvolvido principalmente para:
 
 
 O projeto continua sendo expandido conforme novas rotinas são automatizadas.
+
+
+
+\- Compatibilidade
+
+Este projeto foi desenvolvido de forma independente para automatizar determinadas rotinas de emissão de relatórios no ERP Linx Big Farma.
+
+O projeto não possui vínculo, parceria, patrocínio ou afiliação oficial com a Linx.
+
+Linx e Linx Big Farma são marcas pertencentes aos seus respectivos titulares e são mencionadas neste projeto apenas para identificar o sistema com o qual a automação foi desenvolvida para operar.
 
 
 
