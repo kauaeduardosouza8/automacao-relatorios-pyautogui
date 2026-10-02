@@ -1,17 +1,12 @@
 # Automação para impressão do relatório de conferência de vendas por cupom
 # Desenvolvido para uso no Sistema ERP Linx Big Farma
-# Automação deve ser iniciada com o Sistema aberto previamente
+
 
 import pyautogui
 from time import sleep
 from datetime import date
 import base_de_dados
 
-hoje = date.today()
-ano_atual = hoje.year
-mes_atual = hoje.month
-
-chave = '01_31'
 
 # Define a pausa do pyautogui
 pyautogui.PAUSE = 0.5
@@ -67,32 +62,7 @@ def selecionar_convenio(convenio):
     pyautogui.press('f3')
 
 
-# Ínicio da operação
 
-
-inicio, fim = base_de_dados.definir_datas_inicio_fim(chave)
-
-
-abrir_relatorio_vendas_por_cupom()
-
-
-preencher_periodo_vendas_cupom(inicio, fim)
-
-
-for convenio in base_de_dados.periodos[chave]["convenios"]: 
-        # Define o filtro da convenio
-        selecionar_convenio(convenio)
-
-        
-        sleep(1.5)
-
-        
-        # Envia o relatório para impressão
-        #pyautogui.click(x=101, y=60)
-        #pyautogui.press('enter')
-        
-        # Fecha o relatório
-        pyautogui.click(x=756, y=59)
 
 
 

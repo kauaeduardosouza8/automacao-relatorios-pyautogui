@@ -1,8 +1,14 @@
-from datetime import date, timedelta
+# Base de dados utilizada para a automação de fechamento de convênios
+
+
+from datetime import date
 import calendar
+from time import sleep
 
 
 # Define data atual / Poderá ser substituido por data necessária para emissão do relatório
+
+
 hoje = date.today()
 ano_atual =  hoje.year
 mes_atual = hoje.month
@@ -12,9 +18,9 @@ mes_atual = hoje.month
 
 periodos  = {
     '01_31' : {
-        "dia_inicio" : 1,
-        "dia_fim" : 31,
-        "convenios" : [
+        'dia_inicio' : 1,
+        'dia_fim' : 31,
+        'convenios' : [
             'convenio1',
             'convenio2',
             'convenio3',
@@ -80,6 +86,25 @@ def definir_datas_inicio_fim(chave):
         )
 
     return inicio, fim
+
+
+# Função que solicita do operador a chave do período de fechamento
+
+
+def definiçao_chave():
+    fechamento = int(input('Qual período de fechamento gostaria de imprimir? [1](01-31) [2](20-19) '))
+    
+    while fechamento not in (1,2):
+        print("Opção invalida") 
+        fechamento = fechamento = int(input('Qual período de fechamento gostaria de imprimir? [1](01-31) [2](20-19) '))
+    if fechamento == 1:
+        chave = '01_31'
+    elif fechamento == 2:
+        chave = '20_19'
+
+    sleep(3)
+
+    return chave
 
 
 

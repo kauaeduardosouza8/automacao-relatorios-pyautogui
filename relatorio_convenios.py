@@ -6,9 +6,6 @@ import pyautogui
 from time import sleep
 from datetime import date
 import base_de_dados
-hoje = date.today()
-ano_atual = hoje.year
-mes_atual = hoje.month
 
 
 # Funções do programa 
@@ -95,7 +92,7 @@ def impressao_relatorio():
 
 
             # Envia o documento para impressão
-            pyautogui.click(x=158, y=63) # Clica em quick print
+            #pyautogui.click(x=158, y=63) # Clica em quick print
 
             # Fecha o documento da impressão
             sleep(2)
@@ -104,7 +101,7 @@ def impressao_relatorio():
 
 def loop_impressao_relatorios(chave):
     # Passa por todos elementos do período e emite os relatórios
-    for convenio in base_de_dados.periodos[chave]["convenios"]:
+    for convenio in base_de_dados.periodos[chave]['convenios']:
 
         # Chama função que insere o convênio no filtro
         selecionar_convenio(convenio)
@@ -114,38 +111,8 @@ def loop_impressao_relatorios(chave):
         impressao_relatorio()
         
 
-# Ínicio da execução
 
 
-fechamento = int(input("Qual período de fechamento gostaria de imprimir? [1](01-31) [2](20-19) "))
-if fechamento == 1:
-    chave = '01_31'
-if fechamento == 2:
-    chave = '20_19'
 
-sleep(3)
-
-
-# Chama a função que abre a aba de relatórios
-abrir_aba_relatorio()
-
-
-# Dá um intervalo de tempo para que o sistema de relatórios abra
-sleep(10)
-
-# Utiliza a função na base de dados para definir as datas
-inicio, fim = base_de_dados.definir_datas_inicio_fim(chave)
-
-# Insere no filtro as datas de ínicio e fim
-inserir_data_inicio_fim(inicio, fim)
-
-
-sleep(5)
-
-# Realiza a impressão dos relatórios
-loop_impressao_relatorios(chave)
-
-
-print("Finalizando automação!")
 
 
