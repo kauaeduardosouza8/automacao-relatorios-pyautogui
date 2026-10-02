@@ -5,91 +5,94 @@
 import pyautogui
 from time import sleep
 from datetime import date
-import base_de_dados_nomes_reais
+import base_de_dados
+
 hoje = date.today()
 ano_atual = hoje.year
-mes_atual = 9
-pyautogui.PAUSE = 0.8
+mes_atual = hoje.month
 
-empresa = 'contmax'
+chave = '01_31'
 
-# Solicita do usuário o fechamento buscado
-fechamento = int(input("Qual período de fechamento gostaria de imprimir? [1](01-31) [2](20-19) "))
-if fechamento == 1:
-    chave = '01_31'
-if fechamento == 2:
-    chave = '20_19'
-sleep(5)
-
-
-# Utiliza a função para determinar data de ínicio e fim do período
-dia_inicio = base_de_dados_nomes_reais.periodos[chave]['dia_inicio']
-dia_fim = base_de_dados_nomes_reais.periodos[chave]['dia_fim']
-
-
-inicio, fim = base_de_dados_nomes_reais.criar_periodo(
-    ano_atual,
-    mes_atual,
-    dia_inicio,
-    dia_fim
-    )
-
-
+# Define a pausa do pyautogui
 pyautogui.PAUSE = 0.5
 
 
-# Abre a interface de emissão do relatório
+# Funções do sistema
 
 
-# Clica na aba de relatórios
-pyautogui.click(x=33, y=393)
-
-# Clica no sub-aba de vendas
-pyautogui.click(x=168, y=244)
-
-# Clica na função de confêrencia de venda por cupom
-pyautogui.click(x=241, y=290)
+# Função que abre o relatório de vendas por cupom
+def abrir_relatorio_vendas_por_cupom():
+    # Abre a interface de emissão do relatório
 
 
-# Marca a ordenação por cliente
-pyautogui.click(x=640, y=230)
+    # Clica na aba de relatórios
+    pyautogui.click(x=33, y=393)
 
-# Clica no campo de período
-pyautogui.click(x=543, y=395)
+    # Clica no sub-aba de vendas
+    pyautogui.click(x=168, y=244)
 
-# Define a data inicial
-pyautogui.write(inicio)
-pyautogui.press('enter')
-pyautogui.press('enter')
+    # Clica na função de confêrencia de venda por cupom
+    pyautogui.click(x=241, y=290)
 
 
-# Define a data final
-pyautogui.write(fim)
+# Função ajusta a formatação e preenche o período do relatório
+def preencher_periodo_vendas_cupom(inicio, fim):
+    # Marca a ordenação por cliente
+    pyautogui.click(x=640, y=230)
+
+    # Clica no campo de período
+    pyautogui.click(x=543, y=395)
+
+    # Define a data inicial
+    pyautogui.write(inicio)
+    pyautogui.press('enter')
+    pyautogui.press('enter')
 
 
-for empresa in base_de_dados_nomes_reais.periodos[chave]["empresas"]:
-    # Define o filtro da empresa (Posteriormente inserir no loop)
+    # Define a data final
+    pyautogui.write(fim)
 
-    # Clica no filtro de empresa
+
+# Clica no filtro de convenio
+def selecionar_convenio(convenio):    
     pyautogui.click(x=558, y=498)
     # Limpa seleção
     pyautogui.press('f7')
-    # Pesquisa a empresa pelo nome
-    pyautogui.write(empresa)
+    # Pesquisa a convenio pelo nome
+    pyautogui.write(convenio)
     # Marca a seleção
     pyautogui.press('f5')
     pyautogui.press('enter')
     # Visualiza o relatório
     pyautogui.press('f3')
 
-    
-    sleep(1.5)
-    # Envia o relatório para impressão
-    #pyautogui.click(x=101, y=60)
-    #pyautogui.press('enter')
-    
-    # Fecha o relatório
-    pyautogui.click(x=756, y=59)
+
+# Ínicio da operação
+
+
+inicio, fim = base_de_dados.definir_datas_inicio_fim(chave)
+
+
+abrir_relatorio_vendas_por_cupom()
+
+
+preencher_periodo_vendas_cupom(inicio, fim)
+
+
+for convenio in base_de_dados.periodos[chave]["convenios"]: 
+        # Define o filtro da convenio
+        selecionar_convenio(convenio)
+
+        
+        sleep(1.5)
+
+        
+        # Envia o relatório para impressão
+        #pyautogui.click(x=101, y=60)
+        #pyautogui.press('enter')
+        
+        # Fecha o relatório
+        pyautogui.click(x=756, y=59)
 
 
 

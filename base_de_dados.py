@@ -7,6 +7,30 @@ hoje = date.today()
 ano_atual =  hoje.year
 mes_atual = hoje.month
 
+# Define os períodos de venda e os convênios pertencentes a cada um
+
+
+periodos  = {
+    '01_31' : {
+        "dia_inicio" : 1,
+        "dia_fim" : 31,
+        "convenios" : [
+            'convenio1',
+            'convenio2',
+            'convenio3',
+        ]
+    },
+    '20_19' : {
+        'dia_inicio' : 20,
+        'dia_fim' : 19,
+        'convenios' : [
+            'convenio4',
+            'convenio5',
+            'convenio6',
+        ]
+    }
+}
+
 
 # Define a data de ínicio e fim do período de fechamento
 
@@ -40,62 +64,27 @@ def criar_periodo(ano, mes, dia_inicio, dia_fim):
     return data_inicio, data_final
 
 
-# Define o período de vencimento de cada convênio usando o nome como chave principal
-def criar_periodo_convenio(nome_convenio, ano, mes):
+# Função que determina ínicio e fim com base na chave informada pelo usuário
+def definir_datas_inicio_fim(chave):
+    
+    
+    dia_inicio = periodos[chave]['dia_inicio']
+    dia_fim = periodos[chave]['dia_fim']
 
-    # Encontra o tipo do período no dicionário de convênios
-    tipo_periodo = convenios[nome_convenio]
 
-    # Armazena o dicionário com os períodos em uma variavel
-    periodo = periodos[tipo_periodo]
+    inicio, fim = criar_periodo(
+        ano_atual,
+        mes_atual,
+        dia_inicio,
+        dia_fim
+        )
 
-    # Utiliza as chaves para acessar o contéudo do dicionário
-    dia_inicio = periodo['dia_inicio']
-    dia_fim = periodo['dia_fim']
-
-    return criar_periodo(
-         ano,
-         mes,
-         dia_inicio,
-         dia_fim
-    )
+    return inicio, fim
 
 
 
-# Define os períodos de venda e os convênios pertencentes a cada um
-
-periodos  = {
-    '01_31' : {
-        "dia_inicio" : 1,
-        "dia_fim" : 31,
-        "empresas" : [
-            'empresa1',
-            'empresa2',
-            'empresa3',
-        ]
-    },
-    '20_19' : {
-        'dia_inicio' : 20,
-        'dia_fim' : 19,
-        'empresas' : [
-            'empresa4',
-            'empresa5',
-            'empresa6',
-        ]
-    }
-}
 
 
-# Define os convênios
-
-convenios = {
-    'empresa1' : '01_31',
-    'empresa2' : '01_31',
-    'empresa3' : '01_31',   
-    'empresa4' : '20_19',
-    'empresa5' : '20_19',
-    'empresa6' : '20_19',
-}
 
 
 
