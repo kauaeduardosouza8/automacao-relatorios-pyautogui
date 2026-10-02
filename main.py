@@ -76,11 +76,7 @@ def imprimir_relatorio_convenio_sintetico(chave, inicio, fim):
     print('=' * 60)
 
 
-def main():
-
-
-    # Programa solicita o período para o operador
-    chave =  base_de_dados.definiçao_chave()
+def main(chave):
 
 
     # Utiliza a base de dados para obter a data de inicio e fim formatada
