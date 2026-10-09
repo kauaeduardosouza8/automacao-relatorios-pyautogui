@@ -111,8 +111,31 @@ def loop_impressao_relatorios(chave):
         impressao_relatorio()
         
 
+# Impressão do relatório convênio sintetico por funcionário
+
+def imprimir_relatorio_convenio_sintetico(chave, inicio, fim):
+    # Chama a função que abre a aba de relatórios
+    abrir_aba_relatorio()
 
 
+    # Dá um intervalo de tempo para que o sistema de relatórios abra
+    sleep(10)
+
+
+    # Insere no filtro as datas de ínicio e fim
+    inserir_data_inicio_fim(inicio, fim)
+
+
+    sleep(5)
+
+
+    # Realiza a impressão dos relatórios
+    loop_impressao_relatorios(chave)
+
+
+    print('=' * 60)
+    print('Finalizando impressão relatório convênio sintético por funcionário')
+    print('=' * 60)
 
 
 

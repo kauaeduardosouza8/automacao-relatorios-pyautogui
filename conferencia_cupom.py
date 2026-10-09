@@ -4,8 +4,8 @@
 
 import pyautogui
 from time import sleep
-from datetime import date
 import base_de_dados
+import pygetwindow as gw
 
 
 # Define a pausa do pyautogui
@@ -60,6 +60,52 @@ def selecionar_convenio(convenio):
     pyautogui.press('enter')
     # Visualiza o relatório
     pyautogui.press('f3')
+
+
+def imprimir_conferencia_cupom(chave, inicio, fim):
+# Impressão do relatório de conferência de venda por cupom
+
+
+    abrir_relatorio_vendas_por_cupom()
+
+
+    janela = gw.getWindowsWithTitle('Conferência de Venda por Cupom')
+
+
+    while janela:
+
+
+        preencher_periodo_vendas_cupom(inicio, fim)
+
+
+        for convenio in base_de_dados.periodos[chave]['convenios']: 
+            
+            
+            # Define o filtro da convenio
+            selecionar_convenio(convenio)
+
+            
+            sleep(1.5)
+
+            
+            # Envia o relatório para impressão
+            #pyautogui.click(x=101, y=60)
+            #pyautogui.press('enter')
+            
+            # Fecha o relatório
+            pyautogui.click(x=756, y=59)
+
+
+        # Fecha a tela de conferência de venda por cupom
+        pyautogui.press('esc')
+
+
+        janela = gw.getWindowsWithTitle('Conferência de Venda por Cupom')
+
+
+        print('=' * 60)
+        print('Finalizando impressão relatório de vendas por cupom')
+        print('=' * 60)
 
 
 
